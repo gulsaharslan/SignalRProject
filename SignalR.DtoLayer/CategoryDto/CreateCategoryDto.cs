@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.DtoLayer.CategoryDto
 {
-    public class CreateAboutDto
+    public class CreateCategoryDto
     {
         public string CategoryName { get; set; }
         public bool Status { get; set; }
