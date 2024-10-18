@@ -27,6 +27,25 @@ namespace SignalR.WebApi.Controllers
             return Ok(values);
         }
 
+        [HttpGet("CategoryCount")]
+        public IActionResult CategoryCount()
+        {
+            return Ok(_categoryService.TCategoryCount());
+        }
+
+        [HttpGet("ActiveCategoryCount")]
+        public IActionResult ActiveCategoryCount()
+        {
+            return Ok(_categoryService.TActiveCategoryCount());
+        }
+
+        [HttpGet("PassiveCategoryCount")]
+        public IActionResult PassiveCategoryCount()
+        {
+            return Ok(_categoryService.TPassiveCategoryCount());
+        }
+
+
         [HttpPost]
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
@@ -48,6 +67,8 @@ namespace SignalR.WebApi.Controllers
             var value = _categoryService.TGetByID(id);
             return Ok(value);
         }
+
+
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
@@ -55,5 +76,6 @@ namespace SignalR.WebApi.Controllers
             _categoryService.TUpdate(value);
             return Ok("Kategori Güncellendi");
         }
+
     }
 }
