@@ -24,6 +24,7 @@ namespace SignalR.WebApi.Controllers
         [HttpGet]
         public IActionResult ProductList()
         {
+            //deneme//
             var value = _mapper.Map<List<ResultProductDto>>(_productService.TGetListAll());
             return Ok(value);
         }
