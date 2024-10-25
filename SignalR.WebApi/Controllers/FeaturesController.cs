@@ -30,21 +30,21 @@ namespace SignalR.WebApi.Controllers
         {
             var value = _mapper.Map<Feature>(createFeatureDto);
             _FeatureService.TAdd(value);
-            return Ok("Hakkımda Kısmı Başarılı Bir Şekilde Eklendi");
+            return Ok("Eklendi");
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteFeature(int id)
         {
             var value = _FeatureService.TGetByID(id);
             _FeatureService.TDelete(value);
-            return Ok("Hakkımda Alanı Silindi");
+            return Ok("Silindi");
         }
         [HttpPut]
         public IActionResult UpdateFeature(UpdateFeatureDto updateFeatureDto)
         {
             var value = _mapper.Map<Feature>(updateFeatureDto);
             _FeatureService.TUpdate(value);
-            return Ok("Hakkımda Alanı Güncellendi");
+            return Ok("Güncellendi");
         }
         [HttpGet("{id}")]
         public IActionResult GetFeature(int id)
