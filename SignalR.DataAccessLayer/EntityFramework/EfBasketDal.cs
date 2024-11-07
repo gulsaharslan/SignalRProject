@@ -2,6 +2,7 @@
 using SignalR.DataAccessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.Repositories;
+using SignalR.DtoLayer.BasketDto;
 using SignalR.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,5 +24,22 @@ namespace SignalR.DataAccessLayer.EntityFramework
             var values = context.Baskets.Where(x => x.MenuTableID == id).Include(y => y.Product).ToList();
             return values;
         }
+
+        public List<ResultBasketWithProductNameDto> GetBasketByMenuTableWithProductName(int id)
+        {
+            using var context = new SignalRContext();
+            var values = context.Baskets.Where(x => x.MenuTableID == id).Include(y => y.Product).Select(z => new ResultBasketWithProductNameDto
+            {
+                BasketID = z.BasketID,
+                Count = z.Count,
+                MenuTableID = z.MenuTableID,
+                Price = z.Price,
+                ProductID = z.ProductID,
+                TotalPrice = z.TotalPrice,
+                ProductName = z.Product.ProductName
+            }).ToList();
+            return values;
+        }
     }
+   
 }

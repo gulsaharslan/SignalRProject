@@ -1,5 +1,6 @@
 ﻿using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Abstract;
+using SignalR.DtoLayer.BasketDto;
 using SignalR.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,12 +24,17 @@ namespace SignalR.BusinessLayer.Concrete
 
         public void TDelete(Basket entity)
         {
-            throw new NotImplementedException();
+            _basketDal.Delete(entity);
         }
 
         public List<Basket> TGetBasketByMenuTableNumber(int id)
         {
             return _basketDal.GetBasketByMenuTableNumber(id);
+        }
+
+        public List<ResultBasketWithProductNameDto> TGetBasketByMenuTableWithProductName(int id)
+        {
+           return _basketDal.GetBasketByMenuTableWithProductName(id);
         }
 
         public Basket TGetByID(int id)

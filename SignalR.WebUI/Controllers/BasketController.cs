@@ -14,14 +14,25 @@ namespace SignalR.WebUI.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7018/api/Basket/BasketListByMenuTableWithProductName?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7018/api/Baskets/GetBasketListByMenuTableWithProductName?id=1");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultBasketDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultBasketWithProductNameDto>>(jsonData);
                 return View(values);
             }
             return View();
+        }
+        public async Task<IActionResult> DeleteBasket(int id)
+        {
+            //id = int.Parse(TempData["id"].ToString());
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:7018/api/Baskets/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return NoContent();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace SignalR.WebApi.Mapping
         public BasketMapping()
         {
             CreateMap<Basket, ResultBasketDto>().ReverseMap();
+            CreateMap<Basket, ResultBasketWithProductNameDto>().ReverseMap();
         }
       
     }
