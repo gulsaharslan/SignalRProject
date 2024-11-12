@@ -41,7 +41,9 @@
 										<th>@count</th>
 										<td>@item.Title</td>
 										<td>@item.Amount</td>
-										<td>@item.Status</td>
+										<td class="@(item.Status ? "text-success" : "text-danger")">
+											@(item.Status ? "Aktif" : "Pasif")
+										</td>
 										<td><a href="/Discount/DeleteDiscount/@item.DiscountID" class="btn btn-outline-danger">Sil</a></td>
 										<td><a href="/Discount/UpdateDiscount/@item.DiscountID" class="btn btn-outline-success">Güncelle</a></td>
 										<td><a href="/Discount/ChangeStatusToTrue/@item.DiscountID" class="btn btn-outline-warning">Aktif Yap</a></td>

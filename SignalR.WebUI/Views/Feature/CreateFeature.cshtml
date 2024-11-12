@@ -1,58 +1,58 @@
-﻿@model CreateBookingDto
+﻿@model CreateFeatureDto
 
 @{
-    ViewData["Title"] = "CreateBooking";
+    ViewData["Title"] = "CreateFeature";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">Rezervasyon İşlemleri</h4>
+        <h4 class="page-title">Öne Çıkan Alan İşlemleri</h4>
         <div class="row">
             <div class="col-md-12">
                 <form method="post">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Yeni Rezervasyon Girişi</div>
+                            <div class="card-title">Yeni Öne Çıkan Alan Girişi</div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="Name">Ad Soyad</label>
-                                <input type="text" class="form-control" asp-for="Name" id="Name">
+                                <label for="Title1">1.Başlığı Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Title1" id="Title1">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="Phone">Telefon</label>
-                                <input type="text" class="form-control" asp-for="Phone" id="Phone">
+                                <label for="Title2">2.Başlığı Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Title2" id="Title2">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="Mail">Mail Adresi</label>
-                                <input type="email" class="form-control" asp-for="Mail" id="Mail">
+                                <label for="Title3">3.Başlığı Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Title3" id="Title3">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="PersonCount">Kişi Sayısı</label>
-                                <input type="number" class="form-control" asp-for="PersonCount" id="PersonCount">
+                                <label for="Description1">1.Açıklamayı Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Description1" id="Description1">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="Date">Rezervasyon Tarihi</label>
-                                <input type="date" class="form-control" asp-for="Date" id="Date">
+                                <label for="Description2">2.Açıklamayı Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Description2" id="Description2">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="Time">Rezervasyon Saati</label>
-                                <input type="time" class="form-control" asp-for="Time" id="Time">
+                                <label for="Description3">3.Açıklamayı Giriniz</label>
+                                <input type="text" class="form-control" asp-for="Description3" id="Description3">
                             </div>
                         </div>
                         <div class="card-action">
-                            <button class="btn btn-primary">Rezervasyon Oluştur</button>
+                            <button class="btn btn-primary">Öne Çıkan Alanı Ekle</button>
                         </div>
                     </div>
                 </form>

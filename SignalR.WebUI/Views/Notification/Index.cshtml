@@ -40,17 +40,8 @@
 										<th>@count</th>
 										<td>@item.Description</td>
 										<td>@item.Date</td>
-										<td>
-											@if (item.Status == true)
-											{
-												<span>Okundu</span>
-											}
-											else
-											{
-												<span>Okunmadı</span>
-											}
-
-										
+										<td class="@(item.Status ? "text-success" : "text-danger")">
+											@(item.Status ? "Aktif" : "Pasif")
 										</td>
 										<td><a href="/Notification/DeleteNotification/@item.NotificationID" class="btn btn-outline-danger">Sil</a></td>
 										
