@@ -81,6 +81,12 @@ namespace SignalR.WebApi.Controllers
             return Ok(_productService.TProductNameByMinPrice());
         }
 
+        [HttpGet("GetLast9Products")]
+        public IActionResult GetLast9Products()
+        {
+            return Ok(_productService.TGetLast9Products());
+        }
+
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
