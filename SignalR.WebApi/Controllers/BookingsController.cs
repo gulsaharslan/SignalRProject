@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.BookingDto;
 using SignalR.EntityLayer.Entities;
+using System.Runtime.ConstrainedExecution;
 
 namespace SignalR.WebApi.Controllers
 {
@@ -13,11 +15,13 @@ namespace SignalR.WebApi.Controllers
     {
         private readonly IBookingService _bookingService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateBookingDto> _validator;
 
-        public BookingsController(IBookingService bookingService, IMapper mapper)
+        public BookingsController(IBookingService bookingService, IMapper mapper, IValidator<CreateBookingDto> validator)
         {
             _bookingService = bookingService;
             _mapper = mapper;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -30,6 +34,11 @@ namespace SignalR.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
+            var validationResult = _validator.Validate(createBookingDto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
             var value = _mapper.Map<Booking>(createBookingDto);
             _bookingService.TAdd(value);
             return Ok("Rezervasyon Yapıldı");
@@ -38,6 +47,8 @@ namespace SignalR.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBooking(int id)
         {
+            
+
             var value = _bookingService.TGetByID(id);
             _bookingService.TDelete(value);
             return Ok("Rezervasyon Silindi");
