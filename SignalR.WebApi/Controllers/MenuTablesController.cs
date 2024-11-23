@@ -29,8 +29,7 @@ namespace SignalR.WebApi.Controllers
 		[HttpGet]
 		public IActionResult MenuTableList()
 		{
-			var values = _menuTableService.TGetListAll();
-			return Ok(_mapper.Map<List<ResultMenuTableDto>>(values));
+			return Ok(_mapper.Map<List<ResultMenuTableDto>>(_menuTableService.TGetListAll()));
 		}
 
 		[HttpPost]
