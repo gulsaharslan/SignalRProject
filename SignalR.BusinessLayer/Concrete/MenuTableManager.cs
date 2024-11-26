@@ -21,6 +21,16 @@ namespace SignalR.BusinessLayer.Concrete
             _menuTableDal.Add(entity);
         }
 
+        public void TChangeMenuTableStatusFalse(int id)
+        {
+            _menuTableDal.ChangeMenuTableStatusFalse(id);
+        }
+
+        public void TChangeMenuTableStatusTrue(int id)
+        {
+            _menuTableDal.ChangeMenuTableStatusTrue(id);
+        }
+
         public void TDelete(MenuTable entity)
         {
             _menuTableDal.Delete(entity);

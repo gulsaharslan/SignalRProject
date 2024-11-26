@@ -38,16 +38,15 @@ namespace SignalR.WebApi.Controllers
         public IActionResult CreateBasket(CreateBasketDto createBasketDto)
         {
             var context=new SignalRContext();
-            var productPrice = context.Products.Where(x => x.ProductID == createBasketDto.ProductID).Select(y => y.Price).FirstOrDefault();
             _basketService.TAdd(new Basket()
             {
                 ProductID = createBasketDto.ProductID,
+                MenuTableID = createBasketDto.MenuTableID,
                 Count = 1,
-                MenuTableID = 1,
-                Price =productPrice,
-                TotalPrice = productPrice
+                Price = context.Products.Where(x => x.ProductID == createBasketDto.ProductID).Select(y => y.Price).FirstOrDefault(),
+                TotalPrice = createBasketDto.TotalPrice,
             });
-            return Ok("Ürün Sepete Eklendi");
+            return Ok("Ürün sepete eklendi");
         }
 
         [HttpDelete("{id}")]

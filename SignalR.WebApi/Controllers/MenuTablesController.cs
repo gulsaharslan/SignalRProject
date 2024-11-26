@@ -63,6 +63,20 @@ namespace SignalR.WebApi.Controllers
 			var value = _menuTableService.TGetByID(id);
 			return Ok(_mapper.Map<GetMenuTableDto>(value));
 		}
-        
+
+        [HttpGet("ChangeMenuTableStatusTrue")]
+        public IActionResult ChangeMenuTableStatusTrue(int id)
+        {
+            _menuTableService.TChangeMenuTableStatusTrue(id);
+            return Ok("İşlem başarılı");
+        }
+
+        [HttpGet("ChangeMenuTableStatusFalse")]
+        public IActionResult ChangeMenuTableStatusFalse(int id)
+        {
+            _menuTableService.TChangeMenuTableStatusFalse(id);
+            return Ok("İşlem başarılı");
+        }
+
     }
 }

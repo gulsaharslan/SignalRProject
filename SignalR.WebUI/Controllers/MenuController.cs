@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SignalR.WebUI.Dtos.BasketDtos;
 using SignalR.WebUI.Dtos.ProductDtos;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace SignalR.WebUI.Controllers
@@ -15,8 +16,9 @@ namespace SignalR.WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
+            ViewBag.v = id;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7018/api/Products/ProductListWithCategory");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -25,19 +27,37 @@ namespace SignalR.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int id)
+        public async Task<IActionResult> AddBasket(int id, int menuTableId)
         {
-            CreateBasketDto createBasketDto = new CreateBasketDto();
-            createBasketDto.ProductID = id;
+            if (menuTableId == 0)
+            {
+                return BadRequest("MenuTableId 0 geliyor");
+            }
+
+            // Sepet ekleme DTO'su oluşturuluyor
+            CreateBasketDto createBasketDto = new CreateBasketDto()
+            {
+                ProductID = id,
+                MenuTableID = menuTableId
+            };
+
+            // API'ye veri gönderme
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7018/api/Basket", stringContent);
+
+            var responseMessage = await client.PostAsync("https://localhost:7018/api/Baskets", stringContent);
+
+            // MenuTable durumu güncelleme
+            var client2 = _httpClientFactory.CreateClient();
+            await client2.GetAsync("https://localhost:7018/api/MenuTables/ChangeMenuTableStatusTrue?id=" + menuTableId);
+
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return Ok("Ürün sepete başarıyla eklendi.");
             }
-            return View();
+
+            return BadRequest("Ürün sepete eklenemedi.");
 
 
         }
