@@ -2043,6 +2043,7 @@ body {
   position: fixed;
   z-index: 1001;
   border-bottom: 1px solid #eee;
+  top: 0 ;
 }
 .main-header .logo-header {
   float: left;
